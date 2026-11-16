@@ -1,0 +1,700 @@
+{
+  "evaluated_at": "2026-11-14T11:40:13.067818+00:00",
+  "pipeline": {
+    "chunking": "server/services/chunkingService.js",
+    "query": "server/services/vectorDbService.js",
+    "embedding_model": "nomic-embed-text",
+    "llm": "llama3.2",
+    "temperature": 0.2,
+    "top_k": 4,
+    "eval_collection": "rag_eval_embeddings",
+    "production_collection_untouched": "document_embeddings_ollama",
+    "questions": 16,
+    "limited": false
+  },
+  "index_embed_ms": 4025.7,
+  "llm_warmup_ms": 239.9,
+  "retrieval": {
+    "scope": "answerable questions, chunk level, top 4",
+    "confusion_matrix": {
+      "tp": 10,
+      "fp": 30,
+      "fn": 0,
+      "tn": 40
+    },
+    "precision": 0.25,
+    "recall": 1.0,
+    "f1": 0.4,
+    "accuracy": 0.625,
+    "support": 80,
+    "macro_precision": 0.25,
+    "macro_recall": 1.0,
+    "hit_rate_at_4": 1.0,
+    "mrr": 1.0
+  },
+  "end_to_end": {
+    "positive_class": "question is answerable and the answer states the gold fact",
+    "confusion_matrix": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 0,
+      "tn": 6
+    },
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "accuracy": 1.0,
+    "support": 16
+  },
+  "answerability": {
+    "positive_class": "model answered instead of abstaining",
+    "confusion_matrix": {
+      "tp": 10,
+      "fp": 0,
+      "fn": 0,
+      "tn": 6
+    },
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "accuracy": 1.0,
+    "support": 16
+  },
+  "llm_latency": {
+    "wall_clock_invoke_ms": {
+      "count": 16,
+      "mean_ms": 312.7,
+      "p50_ms": 308.9,
+      "p95_ms": 406.8,
+      "min_ms": 225.5,
+      "max_ms": 411.2
+    },
+    "generation_ms": {
+      "count": 16,
+      "mean_ms": 144.4,
+      "p50_ms": 126.3,
+      "p95_ms": 219.1,
+      "min_ms": 84.5,
+      "max_ms": 289.1
+    },
+    "prompt_eval_ms": {
+      "count": 16,
+      "mean_ms": 44.7,
+      "p50_ms": 14.5,
+      "p95_ms": 134.8,
+      "min_ms": 12.4,
+      "max_ms": 158.9
+    },
+    "load_ms": {
+      "count": 16,
+      "mean_ms": 28.7,
+      "p50_ms": 28.4,
+      "p95_ms": 38.8,
+      "min_ms": 11.9,
+      "max_ms": 40.5
+    },
+    "embed_ms": {
+      "count": 16,
+      "mean_ms": 47.7,
+      "p50_ms": 47.2,
+      "p95_ms": 67.6,
+      "min_ms": 32.1,
+      "max_ms": 76.8
+    },
+    "chroma_query_ms": {
+      "count": 16,
+      "mean_ms": 331.0,
+      "p50_ms": 315.0,
+      "p95_ms": 384.6,
+      "min_ms": 298.6,
+      "max_ms": 415.6
+    }
+  },
+  "cases": [
+    {
+      "id": "h-expense",
+      "document_id": "eval-harbor",
+      "question": "How soon must a Harbor employee submit an expense report after a purchase?",
+      "answerable": true,
+      "gold_chunk_ids": [
+        "eval-harbor-chunk-0"
+      ],
+      "retrieved_ids": [
+        "eval-harbor-chunk-0",
+        "eval-harbor-chunk-1",
+        "eval-harbor-chunk-2",
+        "eval-harbor-chunk-3"
+      ],
+      "distances": [
+        0.3292,
+        0.6522,
+        0.7133,
+        0.7303
+      ],
+      "rank_of_gold": 1,
+      "retrieval_precision": 0.25,
+      "retrieval_recall": 1.0,
+      "abstained": false,
+      "fact_present": true,
+      "end_to_end_correct": true,
+      "answer": "A Harbor employee must submit an expense report within 10 business days of the purchase.",
+      "embed_ms": 48.6,
+      "retrieval_ms": 341.1,
+      "llm_wall_ms": 411.2,
+      "llm_load_ms": 28.5,
+      "llm_prompt_ms": 158.9,
+      "llm_generation_ms": 195.8,
+      "llm_total_ms": 410,
+      "prompt_tokens": 662,
+      "completion_tokens": 18
+    },
+    {
+      "id": "h-travel",
+      "document_id": "eval-harbor",
+      "question": "Who must approve a Harbor trip that costs more than 1500 dollars?",
+      "answerable": true,
+      "gold_chunk_ids": [
+        "eval-harbor-chunk-1"
+      ],
+      "retrieved_ids": [
+        "eval-harbor-chunk-1",
+        "eval-harbor-chunk-0",
+        "eval-harbor-chunk-6",
+        "eval-harbor-chunk-5"
+      ],
+      "distances": [
+        0.3692,
+        0.585,
+        0.8042,
+        0.8088
+      ],
+      "rank_of_gold": 1,
+      "retrieval_precision": 0.25,
+      "retrieval_recall": 1.0,
+      "abstained": false,
+      "fact_present": true,
+      "end_to_end_correct": true,
+      "answer": "The Finance Director must approve a Harbor trip that costs more than $1500.",
+      "embed_ms": 52.8,
+      "retrieval_ms": 356.4,
+      "llm_wall_ms": 327.6,
+      "llm_load_ms": 28.2,
+      "llm_prompt_ms": 12.7,
+      "llm_generation_ms": 184,
+      "llm_total_ms": 326.1,
+      "prompt_tokens": 658,
+      "completion_tokens": 17
+    },
+    {
+      "id": "h-pto",
+      "document_id": "eval-harbor",
+      "question": "How many PTO days does a full-time Harbor employee accrue each month?",
+      "answerable": true,
+      "gold_chunk_ids": [
+        "eval-harbor-chunk-2"
+      ],
+      "retrieved_ids": [
+        "eval-harbor-chunk-2",
+        "eval-harbor-chunk-3",
+        "eval-harbor-chunk-0",
+        "eval-harbor-chunk-6"
+      ],
+      "distances": [
+        0.2821,
+        0.6499,
+        0.6761,
+        0.7863
+      ],
+      "rank_of_gold": 1,
+      "retrieval_precision": 0.25,
+      "retrieval_recall": 1.0,
+      "abstained": false,
+      "fact_present": true,
+      "end_to_end_correct": true,
+      "answer": "A full-time Harbor employee accrues 1.5 PTO days per month.",
+      "embed_ms": 39,
+      "retrieval_ms": 415.6,
+      "llm_wall_ms": 369.6,
+      "llm_load_ms": 40.5,
+      "llm_prompt_ms": 12.5,
+      "llm_generation_ms": 183.7,
+      "llm_total_ms": 367.3,
+      "prompt_tokens": 676,
+      "completion_tokens": 18
+    },
+    {
+      "id": "h-remote",
+      "document_id": "eval-harbor",
+      "question": "Which timezone covers the required online hours for remote Harbor employees?",
+      "answerable": true,
+      "gold_chunk_ids": [
+        "eval-harbor-chunk-3"
+      ],
+      "retrieved_ids": [
+        "eval-harbor-chunk-3",
+        "eval-harbor-chunk-2",
+        "eval-harbor-chunk-1",
+        "eval-harbor-chunk-0"
+      ],
+      "distances": [
+        0.3215,
+        0.7417,
+        0.8643,
+        0.8645
+      ],
+      "rank_of_gold": 1,
+      "retrieval_precision": 0.25,
+      "retrieval_recall": 1.0,
+      "abstained": false,
+      "fact_present": true,
+      "end_to_end_correct": true,
+      "answer": "The America/Chicago timezone covers the required online hours for remote Harbor employees, specifically from 10:00 to 15:00.",
+      "embed_ms": 33,
+      "retrieval_ms": 374.3,
+      "llm_wall_ms": 405.3,
+      "llm_load_ms": 18.1,
+      "llm_prompt_ms": 12.9,
+      "llm_generation_ms": 289.1,
+      "llm_total_ms": 395.7,
+      "prompt_tokens": 660,
+      "completion_tokens": 28
+    },
+    {
+      "id": "n-deductible",
+      "document_id": "eval-northwind",
+      "question": "What is the Northwind individual medical deductible?",
+      "answerable": true,
+      "gold_chunk_ids": [
+        "eval-northwind-chunk-0"
+      ],
+      "retrieved_ids": [
+        "eval-northwind-chunk-0",
+        "eval-northwind-chunk-6",
+        "eval-northwind-chunk-5",
+        "eval-northwind-chunk-7"
+      ],
+      "distances": [
+        0.3172,
+        0.5826,
+        0.6204,
+        0.6536
+      ],
+      "rank_of_gold": 1,
+      "retrieval_precision": 0.25,
+      "retrieval_recall": 1.0,
+      "abstained": false,
+      "fact_present": true,
+      "end_to_end_correct": true,
+      "answer": "The Northwind individual medical deductible is $500 per plan year.",
+      "embed_ms": 62.5,
+      "retrieval_ms": 300.5,
+      "llm_wall_ms": 273.3,
+      "llm_load_ms": 23.9,
+      "llm_prompt_ms": 14.4,
+      "llm_generation_ms": 129.6,
+      "llm_total_ms": 271.9,
+      "prompt_tokens": 645,
+      "completion_tokens": 14
+    },
+    {
+      "id": "n-401k",
+      "document_id": "eval-northwind",
+      "question": "What percentage of base salary does the Northwind 401k match cover?",
+      "answerable": true,
+      "gold_chunk_ids": [
+        "eval-northwind-chunk-1"
+      ],
+      "retrieved_ids": [
+        "eval-northwind-chunk-1",
+        "eval-northwind-chunk-6",
+        "eval-northwind-chunk-5",
+        "eval-northwind-chunk-2"
+      ],
+      "distances": [
+        0.3666,
+        0.6293,
+        0.6961,
+        0.7648
+      ],
+      "rank_of_gold": 1,
+      "retrieval_precision": 0.25,
+      "retrieval_recall": 1.0,
+      "abstained": false,
+      "fact_present": true,
+      "end_to_end_correct": true,
+      "answer": "The Northwind 401k match covers up to 4 percent of base salary.",
+      "embed_ms": 45.6,
+      "retrieval_ms": 298.6,
+      "llm_wall_ms": 342.1,
+      "llm_load_ms": 37.7,
+      "llm_prompt_ms": 14.8,
+      "llm_generation_ms": 190.9,
+      "llm_total_ms": 340.6,
+      "prompt_tokens": 636,
+      "completion_tokens": 18
+    },
+    {
+      "id": "n-parental",
+      "document_id": "eval-northwind",
+      "question": "How many weeks of paid parental leave does a primary caregiver receive at Northwind?",
+      "answerable": true,
+      "gold_chunk_ids": [
+        "eval-northwind-chunk-2"
+      ],
+      "retrieved_ids": [
+        "eval-northwind-chunk-2",
+        "eval-northwind-chunk-5",
+        "eval-northwind-chunk-0",
+        "eval-northwind-chunk-6"
+      ],
+      "distances": [
+        0.1983,
+        0.629,
+        0.6319,
+        0.7203
+      ],
+      "rank_of_gold": 1,
+      "retrieval_precision": 0.25,
+      "retrieval_recall": 1.0,
+      "abstained": false,
+      "fact_present": true,
+      "end_to_end_correct": true,
+      "answer": "A primary caregiver at Northwind receives 12 weeks of paid parental leave.",
+      "embed_ms": 35.1,
+      "retrieval_ms": 315.9,
+      "llm_wall_ms": 292.5,
+      "llm_load_ms": 27.5,
+      "llm_prompt_ms": 12.4,
+      "llm_generation_ms": 167.8,
+      "llm_total_ms": 291.9,
+      "prompt_tokens": 662,
+      "completion_tokens": 16
+    },
+    {
+      "id": "f-radio",
+      "document_id": "eval-field",
+      "question": "What battery does the field radio use?",
+      "answerable": true,
+      "gold_chunk_ids": [
+        "eval-field-chunk-0"
+      ],
+      "retrieved_ids": [
+        "eval-field-chunk-0",
+        "eval-field-chunk-4",
+        "eval-field-chunk-3",
+        "eval-field-chunk-1"
+      ],
+      "distances": [
+        0.356,
+        0.7844,
+        0.8365,
+        0.941
+      ],
+      "rank_of_gold": 1,
+      "retrieval_precision": 0.25,
+      "retrieval_recall": 1.0,
+      "abstained": false,
+      "fact_present": true,
+      "end_to_end_correct": true,
+      "answer": "The field radio uses a CR123A lithium battery.",
+      "embed_ms": 32.1,
+      "retrieval_ms": 313.1,
+      "llm_wall_ms": 263.9,
+      "llm_load_ms": 36.8,
+      "llm_prompt_ms": 12.5,
+      "llm_generation_ms": 119.6,
+      "llm_total_ms": 267,
+      "prompt_tokens": 712,
+      "completion_tokens": 12
+    },
+    {
+      "id": "f-tent",
+      "document_id": "eval-field",
+      "question": "How much does the trail tent weigh?",
+      "answerable": true,
+      "gold_chunk_ids": [
+        "eval-field-chunk-1"
+      ],
+      "retrieved_ids": [
+        "eval-field-chunk-1",
+        "eval-field-chunk-3",
+        "eval-field-chunk-7",
+        "eval-field-chunk-4"
+      ],
+      "distances": [
+        0.4509,
+        0.7499,
+        0.8445,
+        0.8706
+      ],
+      "rank_of_gold": 1,
+      "retrieval_precision": 0.25,
+      "retrieval_recall": 1.0,
+      "abstained": false,
+      "fact_present": true,
+      "end_to_end_correct": true,
+      "answer": "The trail tent weighs 1.8 kilograms.",
+      "embed_ms": 37.7,
+      "retrieval_ms": 304.3,
+      "llm_wall_ms": 378.4,
+      "llm_load_ms": 14,
+      "llm_prompt_ms": 126.8,
+      "llm_generation_ms": 123,
+      "llm_total_ms": 375.1,
+      "prompt_tokens": 726,
+      "completion_tokens": 11
+    },
+    {
+      "id": "f-filter",
+      "document_id": "eval-field",
+      "question": "How fast does the field water filter purify water?",
+      "answerable": true,
+      "gold_chunk_ids": [
+        "eval-field-chunk-2"
+      ],
+      "retrieved_ids": [
+        "eval-field-chunk-2",
+        "eval-field-chunk-3",
+        "eval-field-chunk-0",
+        "eval-field-chunk-5"
+      ],
+      "distances": [
+        0.4211,
+        0.94,
+        0.9497,
+        1.0278
+      ],
+      "rank_of_gold": 1,
+      "retrieval_precision": 0.25,
+      "retrieval_recall": 1.0,
+      "abstained": false,
+      "fact_present": true,
+      "end_to_end_correct": true,
+      "answer": "The field filter purifies 2 liters per minute from clear stream water.",
+      "embed_ms": 55.5,
+      "retrieval_ms": 304.6,
+      "llm_wall_ms": 321.4,
+      "llm_load_ms": 28.4,
+      "llm_prompt_ms": 14.3,
+      "llm_generation_ms": 168.9,
+      "llm_total_ms": 320.8,
+      "prompt_tokens": 709,
+      "completion_tokens": 16
+    },
+    {
+      "id": "h-deductible-miss",
+      "document_id": "eval-harbor",
+      "question": "What is the individual medical deductible?",
+      "answerable": false,
+      "gold_chunk_ids": [],
+      "retrieved_ids": [
+        "eval-harbor-chunk-0",
+        "eval-harbor-chunk-2",
+        "eval-harbor-chunk-6",
+        "eval-harbor-chunk-4"
+      ],
+      "distances": [
+        1.0482,
+        1.0993,
+        1.1334,
+        1.1496
+      ],
+      "rank_of_gold": null,
+      "retrieval_precision": null,
+      "retrieval_recall": null,
+      "abstained": true,
+      "fact_present": false,
+      "end_to_end_correct": true,
+      "answer": "The document does not contain this information.",
+      "embed_ms": 45.7,
+      "retrieval_ms": 310.8,
+      "llm_wall_ms": 225.5,
+      "llm_load_ms": 34.2,
+      "llm_prompt_ms": 14.7,
+      "llm_generation_ms": 84.5,
+      "llm_total_ms": 232.3,
+      "prompt_tokens": 668,
+      "completion_tokens": 9
+    },
+    {
+      "id": "h-battery-miss",
+      "document_id": "eval-harbor",
+      "question": "What battery does the field radio use?",
+      "answerable": false,
+      "gold_chunk_ids": [],
+      "retrieved_ids": [
+        "eval-harbor-chunk-6",
+        "eval-harbor-chunk-4",
+        "eval-harbor-chunk-3",
+        "eval-harbor-chunk-2"
+      ],
+      "distances": [
+        1.0177,
+        1.0836,
+        1.0859,
+        1.1312
+      ],
+      "rank_of_gold": null,
+      "retrieval_precision": null,
+      "retrieval_recall": null,
+      "abstained": true,
+      "fact_present": false,
+      "end_to_end_correct": true,
+      "answer": "The document does not contain this information.",
+      "embed_ms": 34.1,
+      "retrieval_ms": 314.2,
+      "llm_wall_ms": 261.5,
+      "llm_load_ms": 38.2,
+      "llm_prompt_ms": 14.6,
+      "llm_generation_ms": 96.9,
+      "llm_total_ms": 268.5,
+      "prompt_tokens": 675,
+      "completion_tokens": 9
+    },
+    {
+      "id": "n-pto-miss",
+      "document_id": "eval-northwind",
+      "question": "How many PTO days accrue each month?",
+      "answerable": false,
+      "gold_chunk_ids": [],
+      "retrieved_ids": [
+        "eval-northwind-chunk-5",
+        "eval-northwind-chunk-0",
+        "eval-northwind-chunk-1",
+        "eval-northwind-chunk-2"
+      ],
+      "distances": [
+        0.9492,
+        0.9946,
+        0.9973,
+        1.0057
+      ],
+      "rank_of_gold": null,
+      "retrieval_precision": null,
+      "retrieval_recall": null,
+      "abstained": true,
+      "fact_present": false,
+      "end_to_end_correct": true,
+      "answer": "The document does not contain this information.",
+      "embed_ms": 64.5,
+      "retrieval_ms": 355.2,
+      "llm_wall_ms": 296.3,
+      "llm_load_ms": 31.9,
+      "llm_prompt_ms": 74.8,
+      "llm_generation_ms": 95.8,
+      "llm_total_ms": 299,
+      "prompt_tokens": 645,
+      "completion_tokens": 9
+    },
+    {
+      "id": "n-tent-miss",
+      "document_id": "eval-northwind",
+      "question": "How much does the trail tent weigh?",
+      "answerable": false,
+      "gold_chunk_ids": [],
+      "retrieved_ids": [
+        "eval-northwind-chunk-5",
+        "eval-northwind-chunk-0",
+        "eval-northwind-chunk-7",
+        "eval-northwind-chunk-4"
+      ],
+      "distances": [
+        1.0284,
+        1.1577,
+        1.1773,
+        1.2052
+      ],
+      "rank_of_gold": null,
+      "retrieval_precision": null,
+      "retrieval_recall": null,
+      "abstained": true,
+      "fact_present": false,
+      "end_to_end_correct": true,
+      "answer": "The document does not contain this information.",
+      "embed_ms": 51.1,
+      "retrieval_ms": 306.6,
+      "llm_wall_ms": 241.1,
+      "llm_load_ms": 33.6,
+      "llm_prompt_ms": 87.1,
+      "llm_generation_ms": 99.4,
+      "llm_total_ms": 238.2,
+      "prompt_tokens": 646,
+      "completion_tokens": 9
+    },
+    {
+      "id": "f-401k-miss",
+      "document_id": "eval-field",
+      "question": "What percentage of salary does the 401k match cover?",
+      "answerable": false,
+      "gold_chunk_ids": [],
+      "retrieved_ids": [
+        "eval-field-chunk-5",
+        "eval-field-chunk-4",
+        "eval-field-chunk-0",
+        "eval-field-chunk-3"
+      ],
+      "distances": [
+        1.194,
+        1.196,
+        1.2537,
+        1.2797
+      ],
+      "rank_of_gold": null,
+      "retrieval_precision": null,
+      "retrieval_recall": null,
+      "abstained": true,
+      "fact_present": false,
+      "end_to_end_correct": true,
+      "answer": "The document does not contain this information.",
+      "embed_ms": 76.8,
+      "retrieval_ms": 335.5,
+      "llm_wall_ms": 227.8,
+      "llm_load_ms": 11.9,
+      "llm_prompt_ms": 12.7,
+      "llm_generation_ms": 89.4,
+      "llm_total_ms": 224.7,
+      "prompt_tokens": 720,
+      "completion_tokens": 9
+    },
+    {
+      "id": "f-travel-miss",
+      "document_id": "eval-field",
+      "question": "Who approves a trip that costs more than 1500 dollars?",
+      "answerable": false,
+      "gold_chunk_ids": [],
+      "retrieved_ids": [
+        "eval-field-chunk-1",
+        "eval-field-chunk-4",
+        "eval-field-chunk-5",
+        "eval-field-chunk-3"
+      ],
+      "distances": [
+        1.0963,
+        1.1033,
+        1.1495,
+        1.1496
+      ],
+      "rank_of_gold": null,
+      "retrieval_precision": null,
+      "retrieval_recall": null,
+      "abstained": true,
+      "fact_present": false,
+      "end_to_end_correct": true,
+      "answer": "The document does not contain this information.",
+      "embed_ms": 49.1,
+      "retrieval_ms": 349.9,
+      "llm_wall_ms": 365.1,
+      "llm_load_ms": 26.4,
+      "llm_prompt_ms": 119.2,
+      "llm_generation_ms": 92.5,
+      "llm_total_ms": 365.4,
+      "prompt_tokens": 721,
+      "completion_tokens": 9
+    }
+  ],
+  "notes": [
+    "Retrieval precision treats every non-gold chunk inside the top 4 as a false positive. With one relevant chunk, a perfect top-4 retrieval scores precision 0.25 and recall 1.",
+    "End-to-end true positive: an answerable question whose answer includes the gold fact and does not abstain. False positive: an unanswerable question that is answered or that leaks the gold fact. True negative: a correct abstention. False negative: an answerable question that is missed or answered without the fact.",
+    "LLM wall-clock latency is the time ChatOllama.invoke waits in the same call shape as queryDocumentRAG, after a warmup call. Generation latency is Ollama eval_duration when the client returns it."
+  ]
+}
